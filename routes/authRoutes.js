@@ -11,7 +11,10 @@ module.exports = app => {
 
     app.get(
         '/auth/google/callback',
-        passport.authenticate( 'google' )
+        passport.authenticate( 'google' ),
+        (req, res) => {
+            res.redirect('/surveys');
+        }
     );
 
     app.get(
@@ -26,7 +29,13 @@ module.exports = app => {
     app.get(
         '/api/current_user',
         (req, res) => {
-            res.send(req.session);
-            //res.send(req.user);
+            //res.send(req.session);
+            res.send(req.user);
+    });
+
+    app.get(
+        '/test',
+        (req, res) => {
+            res.send(app);
     });
 };
